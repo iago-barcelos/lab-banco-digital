@@ -17,22 +17,34 @@ public class Conta implements IConta{
 
   @Override
   public void sacar(double valor) {
+    if (saldo - valor <= 0.00) {
+      System.out.println("Saldo insuficiente para essa operação");
+    }
 
+    saldo -= valor;
   }
 
   @Override
   public void depositar(double valor) {
-
+    saldo += valor;
   }
 
   @Override
   public void transferir(double valor, IConta contaDestino) {
+    if (saldo - valor <= 0.00) {
+      System.out.println("Saldo insuficiente para essa operação");
+    }
 
+    this.saldo -= valor;
+    contaDestino.depositar(valor);
   }
 
   @Override
   public void imprimirExtrato() {
-
+    System.out.println("Conta:" + this.getNumero());
+    System.out.println("Agencia:" + this.getAgencia());
+    System.out.println("Saldo:" + this.getSaldo());
+    System.out.println("Titular:" + this.cliente.getNome());
   }
 
   public int getAgencia() {
